@@ -1,0 +1,27 @@
+.keyboard-container {
+  .keyborad-letters {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    width: 400px;
+    height: 130px;
+    padding: 10px;
+    margin: 10px;
+    background-color: black;
+
+    button {
+      width: 40px;
+      height: 40px;
+      background-color: #343230;
+      color: white;
+      font-weight: bold;
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+    }
+  }
+}
