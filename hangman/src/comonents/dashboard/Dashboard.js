@@ -29,8 +29,10 @@ const Dashboard = ({ data }) => {
 
   useEffect(() => {
     if(data && data.answer) {
-      setRevealedLetters(Array(data.answer.length).fill(false));
-      setAnswerLetters(data.answer.split(''));
+      let dataAnswerLower = data.answer.toLowerCase();
+      setRevealedLetters(Array(dataAnswerLower.length).fill(false));
+      setAnswerLetters(dataAnswerLower.split(''));
+      // console.log(answerLetters);
     }
   }, [data])
   

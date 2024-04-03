@@ -1,7 +1,10 @@
 import './keyboard.scss';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const Keyboard = ({ onKeyboardClick }) => {
+  //const [pressedKey, setPressedKey] = useState(null);
+  const [disabledKeys, setDisabledKeys] = useState([]);
+
   let charCodes = useMemo(() => ({
     a: 'KeyA',
     b: 'KeyB',
@@ -33,25 +36,36 @@ const Keyboard = ({ onKeyboardClick }) => {
 
   const handleLetterClick = (letter) => {
     onKeyboardClick(letter);
+    setDisabledKeys([...disabledKeys, letter]);
   }
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       const letter = Object.keys(charCodes).find((key) => charCodes[key] === event.code)?.toLowerCase();
-      if(letter) {
+      //setPressedKey(event.key);
+      if(letter && !disabledKeys.includes(letter)) {
         onKeyboardClick(letter);
+        setDisabledKeys([...disabledKeys, letter]);
       }
     }
-    document.addEventListener('keydown', handleKeyDown);
+
+    // const handleKeyUp = (event) => {
+    //   setPressedKey(null);
+    // }
+
+    window.addEventListener('keydown', handleKeyDown);
+    //window.addEventListener('keyup', handleKeyUp);
+
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
+      //window.removeEventListener('keyup', handleKeyUp);
     }
-  }, [onKeyboardClick, charCodes]);
+  }, [onKeyboardClick, charCodes, disabledKeys]);
 
   const createButtons = (alphabet) => {
     let letters = [];
     for(let char in alphabet){
-      letters.push(<button className='keyboard-letter' key={char} onClick={() => handleLetterClick(char)}>{char.toLocaleUpperCase()}</button>);
+      letters.push(<button disabled={disabledKeys.includes(char) ? 'disabled' : null} className={disabledKeys.includes(char) ? 'disabled keyboard-letter' : 'keyboard-letter'} key={char} onClick={() => handleLetterClick(char)}>{char.toLocaleUpperCase()}</button>);
     }
     return letters;
   }
