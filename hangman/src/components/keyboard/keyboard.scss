@@ -1,3 +1,5 @@
+@import './../mixins.scss';
+
 .keyboard-container {
   .keyborad-letters {
     display: flex;
@@ -5,8 +7,15 @@
     flex-direction: row;
     justify-content: center;
     gap: 5px;
-    width: 400px;
-    height: 130px;
+
+    @include responsive('smartphone-landscape') {
+      width: 95%;
+    }
+
+    @include responsive('laptop') {
+      width: 450px;
+    }
+
     padding: 10px;
     margin: 10px;
     background-color: black;

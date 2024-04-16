@@ -1,8 +1,7 @@
 import './keyboard.scss';
 import React, { useEffect, useMemo, useState } from 'react';
 
-const Keyboard = ({ onKeyboardClick }) => {
-  //const [pressedKey, setPressedKey] = useState(null);
+const Keyboard = ({ onKeyboardClick, gameOver, winner }) => {
   const [disabledKeys, setDisabledKeys] = useState([]);
 
   let charCodes = useMemo(() => ({
@@ -40,27 +39,28 @@ const Keyboard = ({ onKeyboardClick }) => {
   }
 
   useEffect(() => {
+    if(gameOver || winner) {
+      setDisabledKeys([]);
+    }
+  }, [gameOver, winner]);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
       const letter = Object.keys(charCodes).find((key) => charCodes[key] === event.code)?.toLowerCase();
-      //setPressedKey(event.key);
-      if(letter && !disabledKeys.includes(letter)) {
+      if(letter && !disabledKeys.includes(letter) && !winner && !gameOver) {
         onKeyboardClick(letter);
         setDisabledKeys([...disabledKeys, letter]);
       }
+
+      //setDisabledKeys([]);
     }
 
-    // const handleKeyUp = (event) => {
-    //   setPressedKey(null);
-    // }
-
     window.addEventListener('keydown', handleKeyDown);
-    //window.addEventListener('keyup', handleKeyUp);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      //window.removeEventListener('keyup', handleKeyUp);
     }
-  }, [onKeyboardClick, charCodes, disabledKeys]);
+  }, [onKeyboardClick, charCodes, disabledKeys, gameOver, winner]);
 
   const createButtons = (alphabet) => {
     let letters = [];

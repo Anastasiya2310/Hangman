@@ -1,29 +1,19 @@
 import { useState, useEffect } from 'react';
 import './dashboard.scss';
 import Keyboard from '../keyboard/Keyboard';
+import Gallows from '../gallows/Gallows';
 
-/*
-  api.json data structure
-
-  data: [
-    {
-      id: number,
-      category: 'string',
-      question: 'string with qustion',
-      answer: 'string with answer',
-    },
-    {
-      id: number,
-      category: 'string',
-      question: 'string with qustion',
-      answer: 'string with answer',
-    },
-  ]
-*/
-
-const Dashboard = ({ data }) => {
+const Dashboard = ({ 
+  data, 
+  gameOver, 
+  setGameOver, 
+  setShow, 
+  winner, 
+  setWinner, 
+  failedAttempts, 
+  setFailedAttempts,
+}) => {
   const [revealedLetters, setRevealedLetters] = useState([]);
-  const [failedAttempts, setFailedAttempts] = useState(0);
   const [keyboardEnabled, setKeyboardEnabled] = useState(true);
   const [answerLetters, setAnswerLetters] = useState([]);
 
@@ -32,9 +22,21 @@ const Dashboard = ({ data }) => {
       let dataAnswerLower = data.answer.toLowerCase();
       setRevealedLetters(Array(dataAnswerLower.length).fill(false));
       setAnswerLetters(dataAnswerLower.split(''));
-      // console.log(answerLetters);
     }
-  }, [data])
+  }, [data, gameOver, winner]);
+
+  useEffect(() => {
+    if (revealedLetters.length > 0 && !revealedLetters.includes(false)) {
+      setKeyboardEnabled(true);
+      setWinner(true);
+      setGameOver(false);
+      setRevealedLetters([]);
+      setFailedAttempts(0);
+      setAnswerLetters([]);
+      setShow(true);
+      return;
+    }
+  }, [data, revealedLetters, setWinner, setShow, answerLetters, setGameOver, setFailedAttempts]);
   
   const answerString = () => {
     return answerLetters.map((element, index) => {
@@ -55,9 +57,16 @@ const Dashboard = ({ data }) => {
     if(!isLetterInAnswer) {
       setFailedAttempts(failedAttempts + 1);
 
-      //if(failedAttempts >= 5) {
+      if(failedAttempts >= 6) {
+        setWinner(false);
         setKeyboardEnabled(true);
-      //}
+        setGameOver(true);
+        setRevealedLetters([]);
+        setFailedAttempts(0);
+        setAnswerLetters([]);
+        setShow(true);
+        return;
+      }
     }
 
     const newRevealedLetters = answerLetters.map((el, index) => {
@@ -67,17 +76,27 @@ const Dashboard = ({ data }) => {
   }
   
   return (
-    <div>
-        {<h1>{data?.question || 'Loading...'}</h1>}
+    <>
+    <div className='dashboard-wrapper'>
+      <div className='quiz-block'>
+        {<h1>
+          Question from category: <span className='question-category-name'>{data?.category || 'Animal'}</span>
+          <p>{data?.question || 'Loading...'}</p>
+        </h1>}
         <div className='answer-container'>
           {data && (answerString(data.answer))}
         </div>
         {keyboardEnabled && data && (
-          <Keyboard onKeyboardClick={handleLetterClick} />
+          <Keyboard onKeyboardClick={handleLetterClick} gameOver={gameOver} />
         )}
         <p>Failed attempts: {failedAttempts} / 6</p>
-      
+      </div>
+      <div className='gallow-block'>
+        <Gallows failed={failedAttempts} />
+      </div>
     </div>
+    </>
+    
   )
 }
 
