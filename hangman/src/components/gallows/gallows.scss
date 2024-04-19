@@ -6,6 +6,8 @@
   img {
     transform: scale(-1, 1);
     position: relative;
+    height: 100%;
+    z-index: 30;
 
     @include responsive('smartphone-portrait') {
       max-height: 400px;
@@ -16,16 +18,16 @@
     }
     
     @include responsive('laptop') {
-      margin-top: 18vh;
-      max-height: 800px;
+      max-height: 700px;
     }
 
     @include responsive('desktop') {
-      max-height: 1000px;
+      max-height: 750px;
     }
 
-    height: 100%;
-    z-index: 30;
+    @include responsive('desktop-large') {
+      max-height: 1000px;
+    }
   }
 
   .man {

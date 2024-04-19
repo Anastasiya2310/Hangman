@@ -12,3 +12,15 @@ h2 {
   font-size: 1.5rem;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url('./../img/background.jpg')center center no-repeat;
+  background-size: cover;
+}
+
