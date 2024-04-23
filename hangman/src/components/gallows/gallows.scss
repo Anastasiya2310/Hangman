@@ -56,6 +56,10 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(90px, 90px, 290px, 405px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(110px, 110px, 630px, 546px);
     }
 
@@ -127,6 +131,10 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(30px, 130px, 370px, 490px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(30px, 130px, 730px, 650px);
     }
 
@@ -152,6 +160,10 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(30px, 130px, 370px, 380px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(30px, 130px, 730px, 520px);
     }
 
@@ -160,6 +172,8 @@
   }
 
   .man-body {
+    border-radius: 50%;
+
     @include responsive('smartphone-portrait') {
       @include hangman(50px, 90px, 190px, 215px);
     }
@@ -177,9 +191,13 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(100px, 170px, 370px, 400px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(100px, 170px, 720px, 550px);
     }
-    border-radius: 50%;
+
   }
 
   .man-left-leg {
@@ -200,6 +218,10 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(30px, 150px, 500px, 460px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(30px, 150px, 860px, 610px);
     }
 
@@ -225,6 +247,10 @@
     }
 
     @include responsive('desktop') {
+      @include hangman(30px, 150px, 500px, 410px);
+    }
+
+    @include responsive('desktop-large') {
       @include hangman(30px, 150px, 860px, 560px);
     }
 

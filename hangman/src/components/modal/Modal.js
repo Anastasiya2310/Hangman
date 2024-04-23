@@ -3,7 +3,6 @@ import './modal.scss';
 const Modal = ({ children, show, hideModal }) => {
   const showHideClassModal = show ? 'modal visible-modal' : 'modal hidden-modal';
   const handleStartGame = () => {
-    console.log("Hide modal!");
     hideModal();
   };
 

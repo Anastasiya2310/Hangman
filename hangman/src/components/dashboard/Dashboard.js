@@ -87,7 +87,7 @@ const Dashboard = ({
           {data && (answerString(data.answer))}
         </div>
         {keyboardEnabled && data && (
-          <Keyboard onKeyboardClick={handleLetterClick} gameOver={gameOver} />
+          <Keyboard onKeyboardClick={handleLetterClick} gameOver={gameOver} winner={winner} />
         )}
         <p>Failed attempts: {failedAttempts} / 6</p>
       </div>

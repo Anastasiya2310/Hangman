@@ -1,5 +1,5 @@
 
-@mixin responsive( $breakpoint ) {
+@mixin responsive( $breakpoint, $orientation: "landscape" ) {
   @if $breakpoint == smartphone-portrait {
       @media only screen and ( max-width: 575.98px ) {
           @content;
@@ -29,7 +29,12 @@
     @media only screen and ( min-width: 1919.99px ) {
         @content;
     }
-}
+  }
+  @if $orientation == portrait {
+    @media only screen and ( orientation: "portrait" ) {
+        @content;
+    }
+  }
 }
 
 @mixin hangman($width, $height, $top, $right) {

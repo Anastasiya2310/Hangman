@@ -56,7 +56,7 @@ const Gallows = ({ failed }) => {
   return (
     <>
       <div className='gallows-img'>
-        <img src='/images/gallows-t.svg' alt='gallows' />
+        <img src='images/gallows-t.svg' alt='gallows' />
         {hangmanParts}
       </div>
     </>

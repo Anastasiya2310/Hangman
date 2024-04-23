@@ -33,14 +33,12 @@ const App = () => {
   const [show, setShow] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  //const [disabledKeys, setDisabledKeys] = useState([]);
   const [failedAttempts, setFailedAttempts] = useState(0);
 
   const hideModal = () => {
     setShow(false);
     setGameOver(false);
     setWinner(false);
-   // setDisabledKeys([]); // Reset disabledKeys when hiding modal
     setFailedAttempts(0);
   }
 

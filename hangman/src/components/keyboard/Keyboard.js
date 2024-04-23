@@ -50,9 +50,9 @@ const Keyboard = ({ onKeyboardClick, gameOver, winner }) => {
       if(letter && !disabledKeys.includes(letter) && !winner && !gameOver) {
         onKeyboardClick(letter);
         setDisabledKeys([...disabledKeys, letter]);
+      } else if(winner || gameOver) {
+        setDisabledKeys([]);
       }
-
-      //setDisabledKeys([]);
     }
 
     window.addEventListener('keydown', handleKeyDown);
