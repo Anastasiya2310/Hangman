@@ -34,16 +34,24 @@ const App = () => {
   const [gameOver, setGameOver] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [failedAttempts, setFailedAttempts] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const handleQuestionChange = (newQuestion) => {
+    setCurrentQuestion(newQuestion);
+  }
 
   const hideModal = () => {
     setShow(false);
     setGameOver(false);
     setWinner(false);
     setFailedAttempts(0);
-  }
 
-  const handleQuestionChange = (newQuestion) => {
-    setCurrentQuestion(newQuestion);
+    if(data.length > 0) {
+      const filteredQuestion = data.filter(item => item.category === selectedCategory);
+      const randomIndex = Math.floor(Math.random() * filteredQuestion.length);
+      const randomQuestion = filteredQuestion[randomIndex];
+      setCurrentQuestion(randomQuestion);
+    }
   }
 
   useEffect(() => {
@@ -67,7 +75,7 @@ const App = () => {
         {gameOver ? (<h1 className="title title-fail">Game Over</h1>) : null}
         {winner ? (<><h1 className="title title-success">You win! Congratulations!</h1><Lottie className="win-animation" animationData={animationData} style={{ width: 200, height: 200 }}></Lottie></>) : null}
         <h2>Choose the category of questions</h2>
-        <Select data={data} onQuestionChange={handleQuestionChange}></Select>   
+        <Select data={data} onQuestionChange={handleQuestionChange} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}></Select>   
       </Modal>
       <Dashboard 
         data={currentQuestion} 
@@ -76,7 +84,6 @@ const App = () => {
         setShow={setShow}  
         winner={winner}
         setWinner={setWinner}
-
         failedAttempts={failedAttempts}
         setFailedAttempts={setFailedAttempts}
       />
