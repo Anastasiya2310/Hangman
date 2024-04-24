@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Hangman/static/css/main.1172abd3.css",
+    "main.css": "/Hangman/static/css/main.1d563b1f.css",
     "main.js": "/Hangman/static/js/main.78cc08a3.js",
     "static/js/453.035fcce8.chunk.js": "/Hangman/static/js/453.035fcce8.chunk.js",
     "static/media/gallows-t.svg": "/Hangman/static/media/gallows-t.b38c5734e5d7addfb1e8.svg",
     "static/media/background-portrait.jpg": "/Hangman/static/media/background-portrait.ab8621d011b3a9bf9096.jpg",
     "static/media/background.jpg": "/Hangman/static/media/background.6ad0e6c69762c2cf11b2.jpg",
     "index.html": "/Hangman/index.html",
-    "main.1172abd3.css.map": "/Hangman/static/css/main.1172abd3.css.map",
+    "main.1d563b1f.css.map": "/Hangman/static/css/main.1d563b1f.css.map",
     "main.78cc08a3.js.map": "/Hangman/static/js/main.78cc08a3.js.map",
     "453.035fcce8.chunk.js.map": "/Hangman/static/js/453.035fcce8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1172abd3.css",
+    "static/css/main.1d563b1f.css",
     "static/js/main.78cc08a3.js"
   ]
 }
